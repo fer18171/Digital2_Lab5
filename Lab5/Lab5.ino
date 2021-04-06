@@ -37,7 +37,16 @@ void loop() {
   printDirectory(myFile, 0);
   while(Serial.available()<1);
   Serial.readBytes(eleccion,sizeof eleccion);
-  
+  if (eleccion[0] == '1'){
+      ReadFile("HEART.txt");
+  } else if (eleccion[0] == '2'){
+      ReadFile("MARIO.txt");
+    }else if (eleccion[0] == '3'){
+      ReadFile("KIRBY.txt");
+    }
+    else{
+      Serial.println("No escribiste un comando valido, escribe unicamente un numeri entre 1 y 3");
+    }
   //ReadFile("MARIO.txt");
 }
 
@@ -52,12 +61,12 @@ void printDirectory(File dir, int numTabs) {
      for (uint8_t i=0; i<numTabs; i++) {
        Serial.print('\t');
      }
-     Serial.print(entry.name());
      if (entry.isDirectory()) {
-       Serial.println("/");
-       printDirectory(entry, numTabs+1);
+       /*Serial.println("/");
+       printDirectory(entry, numTabs+1);*/
      } else {
        // files have sizes, directories do not
+       Serial.print(entry.name());
        Serial.print("\t\t");
        Serial.println(entry.size(), DEC);
      }
