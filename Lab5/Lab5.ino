@@ -1,4 +1,6 @@
 
+
+
 //Incluimos librerias necesarias
 #include <SPI.h>
 #include <SD.h>
@@ -24,8 +26,7 @@ void setup() {
   Serial.println("initialization done.");
 
   //Se imprimen los nombres de los archivos dentro de la SD
- /* myFile = SD.open("/");
-  printDirectory(myFile, 0);*/
+  
 
 }
 
@@ -51,6 +52,7 @@ void loop() {
 }
 
 void printDirectory(File dir, int numTabs) {
+   dir.rewindDirectory();
    while(true) {
      
      File entry =  dir.openNextFile();
@@ -70,7 +72,7 @@ void printDirectory(File dir, int numTabs) {
        Serial.print("\t\t");
        Serial.println(entry.size(), DEC);
      }
-     entry.close();
+    // entry.close();
    }
 }
 
